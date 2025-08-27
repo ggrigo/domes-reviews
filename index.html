@@ -6,6 +6,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <title>Domes White Coast - Share Your Experience</title>
+    <script src="api-client.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600&display=swap');
         
@@ -818,10 +819,10 @@
             charCounter.textContent = `${this.value.length} / 200`;
         });
 
-        // OpenAI configuration
-        const OPENAI_API_KEY = 'YOUR_OPENAI_API_KEY_HERE'; // TODO: Replace with actual API key or use environment variable
+        // Initialize secure API client
+        const reviewClient = new ReviewAPIClient();
         
-        // Generate review using OpenAI
+        // Generate review using secure Netlify function
         async function generateReviewWithAI() {
             const features = selectedFeatures.map(f => {
                 const featureNames = {
@@ -848,37 +849,9 @@
             prompt += ` Write in first person, keep it between 50-100 words, sound natural and enthusiastic but not overly promotional. Vary the writing style and vocabulary. End with a positive closing statement.`;
             
             try {
-                const response = await fetch('https://api.openai.com/v1/chat/completions', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${OPENAI_API_KEY}`
-                    },
-                    body: JSON.stringify({
-                        model: 'gpt-4o-mini',
-                        messages: [
-                            {
-                                role: 'system',
-                                content: 'You are a hotel guest writing a genuine review. Write naturally, vary your style, and avoid repetitive phrases.'
-                            },
-                            {
-                                role: 'user',
-                                content: prompt
-                            }
-                        ],
-                        temperature: 0.9,
-                        max_tokens: 150
-                    })
-                });
-                
-                const data = await response.json();
-                
-                if (data.error) {
-                    console.error('OpenAI API error:', data.error);
-                    return generateFallbackReview();
-                }
-                
-                return data.choices[0].message.content.trim();
+                // Use secure Netlify function instead of direct API call
+                const review = await reviewClient.generateReview(prompt);
+                return review;
             } catch (error) {
                 console.error('Error generating review:', error);
                 return generateFallbackReview();

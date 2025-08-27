@@ -58,10 +58,12 @@ DON'T:
 - Use rounded corners in design
 
 ## Important Notes
-- **API Key**: Stored in .env file (OPENAI_API_KEY)
+- **API Key**: Secured via Netlify Function (never exposed to client)
+- **Netlify Setup**: Set OPENAI_API_KEY in Netlify Environment Variables
+- **Local Dev**: Run `netlify dev` with .env file
 - **Clipboard API**: Requires HTTPS in production
 - **Platform URLs**: TripAdvisor requires hotel page (no direct review URL)
-- **Google Maps Place ID**: ChIJjUneyFTemBQR8l8IIFjXpKE
+- **Google Maps Place ID**: ChIJjUneyFTemBQR8l8IIFjXpKE (Milos)
 - **Character limit**: 200 chars for custom comments
 
 ## Performance Considerations

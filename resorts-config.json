@@ -1,0 +1,396 @@
+{
+  "resorts": {
+    "domes-white-coast-milos": {
+      "id": "domes-white-coast-milos",
+      "name": "Domes White Coast Milos",
+      "location": "Milos, Greece",
+      "features": {
+        "location": {
+          "label": "Location",
+          "icon": "📍",
+          "reviewText": "perfect location in Milos",
+          "fallbackText": "The location in Milos was absolutely perfect"
+        },
+        "cleanliness": {
+          "label": "Cleanliness",
+          "icon": "✨",
+          "reviewText": "impeccable cleanliness",
+          "fallbackText": "The attention to cleanliness was impeccable"
+        },
+        "hospitality": {
+          "label": "Hospitality",
+          "icon": "🤍",
+          "reviewText": "exceptional hospitality",
+          "fallbackText": "The hospitality exceeded all expectations"
+        },
+        "gastronomy": {
+          "label": "Gastronomy",
+          "icon": "🍽️",
+          "reviewText": "exquisite dining experiences",
+          "fallbackText": "The dining experience was truly memorable"
+        },
+        "sunset": {
+          "label": "Sunset",
+          "icon": "🌅",
+          "reviewText": "breathtaking sunsets",
+          "fallbackText": "The sunsets were absolutely breathtaking"
+        },
+        "spa": {
+          "label": "Soma Spa",
+          "icon": "🕊️",
+          "reviewText": "luxurious Soma Spa treatments",
+          "fallbackText": "The Soma Spa treatments were absolutely divine"
+        }
+      },
+      "staff": [
+        {"name": "Marianna", "role": "Guest Relations", "display": "Marianna (Guest Relations)", "icon": "👤"},
+        {"name": "Apostolos", "role": "Restaurant", "display": "Apostolos (Restaurant)", "icon": "👤"},
+        {"name": "Christina", "role": "Reception", "display": "Christina (Reception)", "icon": "👤"},
+        {"name": "Nikos", "role": "Pool Bar", "display": "Nikos (Pool Bar)", "icon": "👤"},
+        {"name": "Elena", "role": "Soma Spa", "display": "Elena (Soma Spa)", "icon": "👤"},
+        {"name": "George", "role": "Concierge", "display": "George (Concierge)", "icon": "👤"}
+      ],
+      "platforms": {
+        "tripadvisor": {
+          "name": "TripAdvisor",
+          "url": "https://www.tripadvisor.com/Hotel_Review-g12880133-d20284485-Reviews-Domes_White_Coast_Milos-Mytakas_Milos_Cyclades_South_Aegean.html"
+        },
+        "google": {
+          "name": "Google Reviews",
+          "url": "https://search.google.com/local/writereview?placeid=ChIJjUneyFTemBQR8l8IIFjXpKE"
+        },
+        "booking": {
+          "name": "Booking.com",
+          "url": "https://www.booking.com/hotel/gr/domes-white-coast-milos.html"
+        },
+        "expedia": {
+          "name": "Expedia",
+          "url": "https://www.expedia.com/Milos-Hotels-White-Coast-Pool-Suites-Adults-Only.h48214292.Hotel-Information"
+        }
+      },
+      "defaultPlatform": "tripadvisor",
+      "googlePlaceId": "ChIJjUneyFTemBQR8l8IIFjXpKE",
+      "tripadvisorUrl": "https://www.tripadvisor.com/Hotel_Review-g12880133-d20284485-Reviews-Domes_White_Coast_Milos-Mytakas_Milos_Cyclades_South_Aegean.html",
+      "bookingUrl": "https://www.booking.com/hotel/gr/domes-white-coast-milos.html",
+      "expediaUrl": "https://www.expedia.com/Milos-Hotels-White-Coast-Pool-Suites-Adults-Only.h48214292.Hotel-Information"
+    },
+    "domes-noruz-chania": {
+      "id": "domes-noruz-chania",
+      "name": "Domes Noruz Chania",
+      "location": "Chania, Crete",
+      "features": {
+        "location": {
+          "label": "Perfect Location",
+          "icon": "📍",
+          "reviewText": "perfect beachfront location in Chania",
+          "fallbackText": "The beachfront location in Chania was absolutely perfect"
+        },
+        "cleanliness": {
+          "label": "Impeccable Cleanliness",
+          "icon": "✨",
+          "reviewText": "impeccable cleanliness",
+          "fallbackText": "The attention to cleanliness was impeccable"
+        },
+        "hospitality": {
+          "label": "Cretan Hospitality",
+          "icon": "🤍",
+          "reviewText": "exceptional Cretan hospitality",
+          "fallbackText": "The Cretan hospitality exceeded all expectations"
+        },
+        "gastronomy": {
+          "label": "Mediterranean Cuisine",
+          "icon": "🍽️",
+          "reviewText": "outstanding Mediterranean cuisine",
+          "fallbackText": "The Mediterranean cuisine was truly outstanding"
+        },
+        "family": {
+          "label": "Family Paradise",
+          "icon": "👨‍👩‍👧‍👦",
+          "reviewText": "perfect family-friendly facilities",
+          "fallbackText": "The family facilities were absolutely perfect"
+        },
+        "beach": {
+          "label": "Private Beach",
+          "icon": "🏖️",
+          "reviewText": "pristine private beach",
+          "fallbackText": "The private beach was pristine and beautiful"
+        }
+      },
+      "staff": [
+        {"name": "Kostas", "role": "Guest Relations", "display": "Kostas (Guest Relations)", "icon": "👤"},
+        {"name": "Maria", "role": "Kids Club", "display": "Maria (Kids Club)", "icon": "👤"},
+        {"name": "Yannis", "role": "Beach Bar", "display": "Yannis (Beach Bar)", "icon": "👤"},
+        {"name": "Eleni", "role": "Reception", "display": "Eleni (Reception)", "icon": "👤"},
+        {"name": "Dimitris", "role": "Restaurant", "display": "Dimitris (Restaurant)", "icon": "👤"},
+        {"name": "Anna", "role": "Concierge", "display": "Anna (Concierge)", "icon": "👤"}
+      ],
+      "platforms": {
+        "tripadvisor": {
+          "name": "TripAdvisor",
+          "url": "https://www.tripadvisor.com/Hotel_Review-PLACEHOLDER"
+        },
+        "google": {
+          "name": "Google Reviews",
+          "url": "https://search.google.com/local/writereview?placeid=PLACEHOLDER_GOOGLE_ID"
+        },
+        "booking": {
+          "name": "Booking.com",
+          "url": "https://www.booking.com/hotel/gr/domes-noruz-chania.html"
+        },
+        "expedia": {
+          "name": "Expedia",
+          "url": "https://www.expedia.com/PLACEHOLDER"
+        }
+      },
+      "defaultPlatform": "tripadvisor",
+      "googlePlaceId": "PLACEHOLDER_GOOGLE_ID",
+      "tripadvisorUrl": "https://www.tripadvisor.com/Hotel_Review-PLACEHOLDER",
+      "bookingUrl": "https://www.booking.com/hotel/gr/domes-noruz-chania.html",
+      "expediaUrl": "https://www.expedia.com/PLACEHOLDER"
+    },
+    "domes-aulus-elounda": {
+      "id": "domes-aulus-elounda",
+      "name": "Domes Aulus Elounda",
+      "location": "Elounda, Crete",
+      "features": {
+        "location": {
+          "label": "Stunning Location",
+          "icon": "📍",
+          "reviewText": "stunning location overlooking Spinalonga",
+          "fallbackText": "The location overlooking Spinalonga was absolutely stunning"
+        },
+        "cleanliness": {
+          "label": "Impeccable Cleanliness",
+          "icon": "✨",
+          "reviewText": "impeccable cleanliness",
+          "fallbackText": "The attention to cleanliness was impeccable"
+        },
+        "hospitality": {
+          "label": "Exceptional Hospitality",
+          "icon": "🤝",
+          "reviewText": "exceptional hospitality",
+          "fallbackText": "The hospitality exceeded all expectations"
+        },
+        "dining": {
+          "label": "Haute Living Selection",
+          "icon": "🍽️",
+          "reviewText": "exceptional Haute Living dining experiences",
+          "fallbackText": "The Haute Living dining was truly exceptional"
+        },
+        "luxury": {
+          "label": "Ultra Luxury",
+          "icon": "💎",
+          "reviewText": "ultra-luxury accommodations",
+          "fallbackText": "The ultra-luxury experience was unparalleled"
+        },
+        "wellness": {
+          "label": "Core Wellness",
+          "icon": "🧘",
+          "reviewText": "transformative Core wellness programs",
+          "fallbackText": "The Core wellness programs were transformative"
+        }
+      },
+      "staff": [
+        {"name": "Michalis", "role": "Butler Service", "display": "Michalis (Butler Service)", "icon": "👤"},
+        {"name": "Sofia", "role": "Core Wellness", "display": "Sofia (Core Wellness)", "icon": "👤"},
+        {"name": "Andreas", "role": "Haute Living Chef", "display": "Andreas (Haute Living Chef)", "icon": "👤"},
+        {"name": "Katerina", "role": "Guest Relations", "display": "Katerina (Guest Relations)", "icon": "👤"},
+        {"name": "Stavros", "role": "Concierge", "display": "Stavros (Concierge)", "icon": "👤"},
+        {"name": "Ioanna", "role": "Reception", "display": "Ioanna (Reception)", "icon": "👤"}
+      ],
+      "platforms": {
+        "booking": {
+          "name": "Booking.com",
+          "url": "https://www.booking.com/hotel/gr/domes-aulus-elounda.html",
+          "additionalPlatforms": [
+            {"id": "google", "name": "Google Reviews", "url": "https://search.google.com/local/writereview?placeid=PLACEHOLDER_GOOGLE_ID", "checked": true},
+            {"id": "tripadvisor", "name": "TripAdvisor", "url": "https://www.tripadvisor.com/Hotel_Review-PLACEHOLDER", "checked": false}
+          ]
+        },
+        "expedia": {
+          "name": "Expedia",
+          "url": "https://www.expedia.com/PLACEHOLDER",
+          "additionalPlatforms": [
+            {"id": "google", "name": "Google Reviews", "url": "https://search.google.com/local/writereview?placeid=PLACEHOLDER_GOOGLE_ID", "checked": true},
+            {"id": "tripadvisor", "name": "TripAdvisor", "url": "https://www.tripadvisor.com/Hotel_Review-PLACEHOLDER", "checked": false}
+          ]
+        },
+        "default": {
+          "name": "",
+          "url": "",
+          "additionalPlatforms": [
+            {"id": "tripadvisor", "name": "TripAdvisor", "url": "https://www.tripadvisor.com/Hotel_Review-PLACEHOLDER", "checked": true},
+            {"id": "google", "name": "Google Maps", "url": "https://search.google.com/local/writereview?placeid=PLACEHOLDER_GOOGLE_ID", "checked": true}
+          ]
+        }
+      },
+      "googlePlaceId": "PLACEHOLDER_GOOGLE_ID",
+      "tripadvisorUrl": "https://www.tripadvisor.com/Hotel_Review-PLACEHOLDER",
+      "bookingUrl": "https://www.booking.com/hotel/gr/domes-aulus-elounda.html",
+      "expediaUrl": "https://www.expedia.com/PLACEHOLDER"
+    },
+    "domes-miramare-corfu": {
+      "id": "domes-miramare-corfu",
+      "name": "Domes Miramare Corfu",
+      "location": "Corfu, Greece",
+      "features": {
+        "location": {
+          "label": "Waterfront Paradise",
+          "icon": "📍",
+          "reviewText": "stunning waterfront location in Corfu",
+          "fallbackText": "The waterfront location in Corfu was absolutely stunning"
+        },
+        "cleanliness": {
+          "label": "Impeccable Cleanliness",
+          "icon": "✨",
+          "reviewText": "impeccable cleanliness",
+          "fallbackText": "The attention to cleanliness was impeccable"
+        },
+        "hospitality": {
+          "label": "Exceptional Hospitality",
+          "icon": "🤝",
+          "reviewText": "exceptional hospitality",
+          "fallbackText": "The hospitality exceeded all expectations"
+        },
+        "dining": {
+          "label": "Makris Restaurant",
+          "icon": "🍽️",
+          "reviewText": "outstanding dining at Makris restaurant",
+          "fallbackText": "Dining at Makris restaurant was outstanding"
+        },
+        "luxury": {
+          "label": "Adults-Only Luxury",
+          "icon": "💎",
+          "reviewText": "perfect adults-only luxury experience",
+          "fallbackText": "The adults-only luxury experience was perfect"
+        },
+        "pavilion": {
+          "label": "Pavilion Suites",
+          "icon": "🏛️",
+          "reviewText": "exclusive Pavilion suite experience",
+          "fallbackText": "The Pavilion suites were absolutely exclusive"
+        }
+      },
+      "staff": [
+        {"name": "Spyros", "role": "Guest Relations", "display": "Spyros (Guest Relations)", "icon": "👤"},
+        {"name": "Alexandra", "role": "Makris Restaurant", "display": "Alexandra (Makris Restaurant)", "icon": "👤"},
+        {"name": "Petros", "role": "Bar Manager", "display": "Petros (Bar Manager)", "icon": "👤"},
+        {"name": "Dimitra", "role": "Reception", "display": "Dimitra (Reception)", "icon": "👤"},
+        {"name": "Christos", "role": "Concierge", "display": "Christos (Concierge)", "icon": "👤"},
+        {"name": "Vicky", "role": "Spa Manager", "display": "Vicky (Spa Manager)", "icon": "👤"}
+      ],
+      "platforms": {
+        "booking": {
+          "name": "Booking.com",
+          "url": "https://www.booking.com/hotel/gr/domes-miramare-corfu.html",
+          "additionalPlatforms": [
+            {"id": "google", "name": "Google Reviews", "url": "https://search.google.com/local/writereview?placeid=PLACEHOLDER_GOOGLE_ID", "checked": true},
+            {"id": "tripadvisor", "name": "TripAdvisor", "url": "https://www.tripadvisor.com/Hotel_Review-PLACEHOLDER", "checked": false}
+          ]
+        },
+        "expedia": {
+          "name": "Expedia",
+          "url": "https://www.expedia.com/PLACEHOLDER",
+          "additionalPlatforms": [
+            {"id": "google", "name": "Google Reviews", "url": "https://search.google.com/local/writereview?placeid=PLACEHOLDER_GOOGLE_ID", "checked": true},
+            {"id": "tripadvisor", "name": "TripAdvisor", "url": "https://www.tripadvisor.com/Hotel_Review-PLACEHOLDER", "checked": false}
+          ]
+        },
+        "default": {
+          "name": "",
+          "url": "",
+          "additionalPlatforms": [
+            {"id": "tripadvisor", "name": "TripAdvisor", "url": "https://www.tripadvisor.com/Hotel_Review-PLACEHOLDER", "checked": true},
+            {"id": "google", "name": "Google Maps", "url": "https://search.google.com/local/writereview?placeid=PLACEHOLDER_GOOGLE_ID", "checked": true}
+          ]
+        }
+      },
+      "googlePlaceId": "PLACEHOLDER_GOOGLE_ID",
+      "tripadvisorUrl": "https://www.tripadvisor.com/Hotel_Review-PLACEHOLDER",
+      "bookingUrl": "https://www.booking.com/hotel/gr/domes-miramare-corfu.html",
+      "expediaUrl": "https://www.expedia.com/PLACEHOLDER"
+    },
+    "domes-lake-algarve": {
+      "id": "domes-lake-algarve",
+      "name": "Domes Lake Algarve",
+      "location": "Vilamoura, Portugal",
+      "features": {
+        "location": {
+          "label": "Prime Location",
+          "icon": "📍",
+          "reviewText": "prime location in Vilamoura Marina",
+          "fallbackText": "The location in Vilamoura Marina was absolutely prime"
+        },
+        "cleanliness": {
+          "label": "Impeccable Cleanliness",
+          "icon": "✨",
+          "reviewText": "impeccable cleanliness",
+          "fallbackText": "The attention to cleanliness was impeccable"
+        },
+        "hospitality": {
+          "label": "Portuguese Hospitality",
+          "icon": "🤝",
+          "reviewText": "warm Portuguese hospitality",
+          "fallbackText": "The Portuguese hospitality was wonderfully warm"
+        },
+        "dining": {
+          "label": "Topos Restaurant",
+          "icon": "🍽️",
+          "reviewText": "exceptional dining at Topos restaurant",
+          "fallbackText": "Dining at Topos restaurant was exceptional"
+        },
+        "golf": {
+          "label": "Golf Paradise",
+          "icon": "⛳",
+          "reviewText": "perfect golf resort facilities",
+          "fallbackText": "The golf resort facilities were perfect"
+        },
+        "marina": {
+          "label": "Marina Views",
+          "icon": "⛵",
+          "reviewText": "stunning Vilamoura Marina views",
+          "fallbackText": "The Vilamoura Marina views were stunning"
+        }
+      },
+      "staff": [
+        {"name": "João", "role": "Guest Relations", "display": "João (Guest Relations)", "icon": "👤"},
+        {"name": "Ana", "role": "Topos Restaurant", "display": "Ana (Topos Restaurant)", "icon": "👤"},
+        {"name": "Miguel", "role": "Golf Concierge", "display": "Miguel (Golf Concierge)", "icon": "👤"},
+        {"name": "Teresa", "role": "Reception", "display": "Teresa (Reception)", "icon": "👤"},
+        {"name": "Carlos", "role": "Marina Bar", "display": "Carlos (Marina Bar)", "icon": "👤"},
+        {"name": "Isabel", "role": "Spa Manager", "display": "Isabel (Spa Manager)", "icon": "👤"}
+      ],
+      "platforms": {
+        "booking": {
+          "name": "Booking.com",
+          "url": "https://www.booking.com/hotel/pt/domes-lake-algarve.html",
+          "additionalPlatforms": [
+            {"id": "google", "name": "Google Reviews", "url": "https://search.google.com/local/writereview?placeid=PLACEHOLDER_GOOGLE_ID", "checked": true},
+            {"id": "tripadvisor", "name": "TripAdvisor", "url": "https://www.tripadvisor.com/Hotel_Review-PLACEHOLDER", "checked": false}
+          ]
+        },
+        "expedia": {
+          "name": "Expedia",
+          "url": "https://www.expedia.com/PLACEHOLDER",
+          "additionalPlatforms": [
+            {"id": "google", "name": "Google Reviews", "url": "https://search.google.com/local/writereview?placeid=PLACEHOLDER_GOOGLE_ID", "checked": true},
+            {"id": "tripadvisor", "name": "TripAdvisor", "url": "https://www.tripadvisor.com/Hotel_Review-PLACEHOLDER", "checked": false}
+          ]
+        },
+        "default": {
+          "name": "",
+          "url": "",
+          "additionalPlatforms": [
+            {"id": "tripadvisor", "name": "TripAdvisor", "url": "https://www.tripadvisor.com/Hotel_Review-PLACEHOLDER", "checked": true},
+            {"id": "google", "name": "Google Maps", "url": "https://search.google.com/local/writereview?placeid=PLACEHOLDER_GOOGLE_ID", "checked": true}
+          ]
+        }
+      },
+      "googlePlaceId": "PLACEHOLDER_GOOGLE_ID",
+      "tripadvisorUrl": "https://www.tripadvisor.com/Hotel_Review-PLACEHOLDER",
+      "bookingUrl": "https://www.booking.com/hotel/pt/domes-lake-algarve.html",
+      "expediaUrl": "https://www.expedia.com/PLACEHOLDER"
+    }
+  },
+  "defaultResort": "domes-white-coast-milos"
+}
