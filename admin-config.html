@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domes Resorts - Configuration Admin</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600&display=swap');
+        
+        :root {
+            --domes-blue: #1a3a52;
+            --domes-gold: #c9a961;
+            --domes-sand: #f5f0e8;
+            --domes-white: #ffffff;
+            --domes-gray: #6b6b6b;
+            --text-dark: #2c2c2c;
+            --border-light: #e0e0e0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--domes-sand);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid var(--domes-gold);
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            color: var(--domes-blue);
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 14px;
+            color: var(--domes-gray);
+            letter-spacing: 1px;
+        }
+        
+        .resort-section {
+            background: white;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .resort-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        .resort-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: var(--domes-blue);
+        }
+        
+        .resort-id {
+            font-size: 12px;
+            color: var(--domes-gray);
+            font-family: monospace;
+            background: var(--domes-sand);
+            padding: 4px 8px;
+        }
+        
+        .config-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        .config-section {
+            padding: 20px;
+            background: var(--domes-sand);
+        }
+        
+        .config-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--domes-blue);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .feature-list, .staff-list {
+            display: grid;
+            gap: 10px;
+        }
+        
+        .feature-item, .staff-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: white;
+            border: 1px solid var(--border-light);
+        }
+        
+        .feature-icon, .staff-icon {
+            font-size: 20px;
+        }
+        
+        .feature-label, .staff-name {
+            font-size: 13px;
+            flex: 1;
+        }
+        
+        .staff-role {
+            font-size: 11px;
+            color: var(--domes-gray);
+        }
+        
+        .url-section {
+            grid-column: span 2;
+            background: white;
+            padding: 20px;
+            border: 1px solid var(--border-light);
+        }
+        
+        .url-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .url-item {
+            padding: 10px;
+            background: var(--domes-sand);
+        }
+        
+        .url-platform {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--domes-blue);
+            margin-bottom: 5px;
+        }
+        
+        .url-value {
+            font-size: 11px;
+            color: var(--domes-gray);
+            word-break: break-all;
+            font-family: monospace;
+        }
+        
+        .instructions {
+            background: var(--domes-blue);
+            color: white;
+            padding: 30px;
+            margin-top: 40px;
+        }
+        
+        .instructions h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .instructions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .instruction-item {
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .instruction-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .instruction-text {
+            font-size: 12px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+        
+        .code {
+            font-family: monospace;
+            background: rgba(0,0,0,0.2);
+            padding: 2px 6px;
+            font-size: 11px;
+        }
+        
+        @media (max-width: 768px) {
+            .config-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .url-section {
+                grid-column: span 1;
+            }
+            
+            .url-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Domes Resorts Configuration</h1>
+            <p class="subtitle">Admin View - Resort Settings & URL Structure</p>
+        </div>
+        
+        <!-- Domes White Coast Milos -->
+        <div class="resort-section">
+            <div class="resort-header">
+                <h2 class="resort-name">Domes White Coast Milos</h2>
+                <span class="resort-id">domes-white-coast-milos</span>
+            </div>
+            
+            <div class="config-grid">
+                <div class="config-section">
+                    <h3 class="config-title">Features Available</h3>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <span class="feature-icon">📍</span>
+                            <span class="feature-label">Location</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✨</span>
+                            <span class="feature-label">Cleanliness</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🤍</span>
+                            <span class="feature-label">Hospitality</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🍽️</span>
+                            <span class="feature-label">Gastronomy</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🌅</span>
+                            <span class="feature-label">Sunset</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🕊️</span>
+                            <span class="feature-label">Soma Spa</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="config-section">
+                    <h3 class="config-title">Team Members</h3>
+                    <div class="staff-list">
+                        <div class="staff-item">
+                            <span class="staff-icon">👤</span>
+                            <div>
+                                <div class="staff-name">Marianna</div>
+                                <div class="staff-role">Guest Relations</div>
+                            </div>
+                        </div>
+                        <div class="staff-item">
+                            <span class="staff-icon">👤</span>
+                            <div>
+                                <div class="staff-name">Apostolos</div>
+                                <div class="staff-role">Restaurant</div>
+                            </div>
+                        </div>
+                        <div class="staff-item">
+                            <span class="staff-icon">👤</span>
+                            <div>
+                                <div class="staff-name">Christina</div>
+                                <div class="staff-role">Reception</div>
+                            </div>
+                        </div>
+                        <div class="staff-item">
+                            <span class="staff-icon">👤</span>
+                            <div>
+                                <div class="staff-name">Nikos</div>
+                                <div class="staff-role">Pool Bar</div>
+                            </div>
+                        </div>
+                        <div class="staff-item">
+                            <span class="staff-icon">👤</span>
+                            <div>
+                                <div class="staff-name">Elena</div>
+                                <div class="staff-role">Soma Spa</div>
+                            </div>
+                        </div>
+                        <div class="staff-item">
+                            <span class="staff-icon">👤</span>
+                            <div>
+                                <div class="staff-name">George</div>
+                                <div class="staff-role">Concierge</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="url-section">
+                    <h3 class="config-title">Platform URLs</h3>
+                    <div class="url-grid">
+                        <div class="url-item">
+                            <div class="url-platform">TripAdvisor</div>
+                            <div class="url-value">tripadvisor.com/Hotel_Review-g12880133-d20284485</div>
+                        </div>
+                        <div class="url-item">
+                            <div class="url-platform">Google Reviews</div>
+                            <div class="url-value">Place ID: ChIJjUneyFTemBQR8l8IIFjXpKE</div>
+                        </div>
+                        <div class="url-item">
+                            <div class="url-platform">Booking.com</div>
+                            <div class="url-value">booking.com/hotel/gr/domes-white-coast-milos.html</div>
+                        </div>
+                        <div class="url-item">
+                            <div class="url-platform">Expedia</div>
+                            <div class="url-value">expedia.com/Milos-Hotels.h48214292</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Add More Resorts Template -->
+        <div class="resort-section" style="opacity: 0.5;">
+            <div class="resort-header">
+                <h2 class="resort-name">Domes Noruz Chania</h2>
+                <span class="resort-id">domes-noruz-chania</span>
+            </div>
+            
+            <div class="config-grid">
+                <div class="config-section">
+                    <h3 class="config-title">Features Available</h3>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <span class="feature-icon">📍</span>
+                            <span class="feature-label">Location</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✨</span>
+                            <span class="feature-label">Cleanliness</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🤍</span>
+                            <span class="feature-label">Cretan Hospitality</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🍽️</span>
+                            <span class="feature-label">Mediterranean Cuisine</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">👨‍👩‍👧‍👦</span>
+                            <span class="feature-label">Family Paradise</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🏖️</span>
+                            <span class="feature-label">Private Beach</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="config-section">
+                    <h3 class="config-title">Team Members</h3>
+                    <p style="color: #999; font-size: 13px;">Configuration pending...</p>
+                </div>
+                
+                <div class="url-section">
+                    <h3 class="config-title">Platform URLs</h3>
+                    <p style="color: #999; font-size: 13px;">URLs to be configured...</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Instructions Section -->
+        <div class="instructions">
+            <h2>URL Structure & Usage Instructions</h2>
+            
+            <div class="instructions-grid">
+                <div class="instruction-item">
+                    <div class="instruction-title">Resort Selection</div>
+                    <div class="instruction-text">
+                        Use URL parameter to select resort:<br>
+                        <span class="code">?resort=domes-white-coast-milos</span><br>
+                        <span class="code">?resort=domes-noruz-chania</span><br>
+                        Default: domes-white-coast-milos
+                    </div>
+                </div>
+                
+                <div class="instruction-item">
+                    <div class="instruction-title">Platform Routing</div>
+                    <div class="instruction-text">
+                        Use platform parameter to set review destination:<br>
+                        <span class="code">?platform=tripadvisor</span> (default)<br>
+                        <span class="code">?platform=google</span><br>
+                        <span class="code">?platform=booking</span><br>
+                        <span class="code">?platform=expedia</span>
+                    </div>
+                </div>
+                
+                <div class="instruction-item">
+                    <div class="instruction-title">Combined Parameters</div>
+                    <div class="instruction-text">
+                        Full URL examples:<br>
+                        <span class="code">domain.com?resort=domes-white-coast-milos&platform=google</span><br>
+                        <span class="code">domain.com?resort=domes-noruz-chania&platform=booking</span>
+                    </div>
+                </div>
+                
+                <div class="instruction-item">
+                    <div class="instruction-title">QR Code Generation</div>
+                    <div class="instruction-text">
+                        Generate QR codes with specific parameters for each use case. 
+                        Place QR codes in rooms, reception, or send via email with 
+                        appropriate resort and platform parameters.
+                    </div>
+                </div>
+                
+                <div class="instruction-item">
+                    <div class="instruction-title">Adding New Resorts</div>
+                    <div class="instruction-text">
+                        To add a new resort, update the resorts-config.json file with:
+                        features array, staff members, platform URLs, and resort ID.
+                        The system will automatically load the new configuration.
+                    </div>
+                </div>
+                
+                <div class="instruction-item">
+                    <div class="instruction-title">Icon Guidelines</div>
+                    <div class="instruction-text">
+                        Use Unicode emojis for consistency. Each feature should have 
+                        a unique, recognizable icon. Staff icons remain uniform (👤) 
+                        for consistency across all properties.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
