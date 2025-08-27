@@ -1,111 +1,98 @@
-# CLAUDE.md
+# Project Context
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+## Tech Stack
+- Language: HTML, CSS, JavaScript (Vanilla)
+- Deployment: Netlify (Static hosting)
+- API: OpenAI GPT-4o-mini
+- Testing: Selenium WebDriver (Python)
+- Package Manager: npm (for development tools)
 
-## Project Overview
+## Coding Standards
+- Mobile-first responsive design
+- Self-contained HTML files (no build process required)
+- Inline CSS and JavaScript for simplicity
+- Minimal luxury aesthetic with no rounded corners
+- Accessibility-first approach
 
-Hotel review generation system for Domes White Coast Milos - a single-page web application that helps guests create personalized reviews and share them across multiple platforms (TripAdvisor, Booking.com, Expedia, Google Maps).
-
-## Development Commands
-
-```bash
-# Serve the application locally
-python3 -m http.server 8000
-
-# Install Python test dependencies
-pip install -r requirements.txt  # Contains: selenium==4.17.2
-
-# Deploy to Netlify (if configured)
-netlify deploy
+## Project Structure
+```
+.
+├── index.html              # Main review generation app
+├── hotel-review-generator.html  # Alternate version
+├── .env                    # API keys (not committed)
+├── netlify.toml           # Deployment configuration
+├── requirements.txt       # Python test dependencies
+└── claude-code-tools/     # Development tools & docs
+    ├── docs/              # Documentation guides
+    ├── templates/         # Configuration templates
+    └── examples/          # Example configurations
 ```
 
-## Architecture
+## Key Patterns
+- Platform routing: URL parameters (?platform=booking|expedia)
+- Review generation: OpenAI API with template fallback
+- Clipboard API: For review copying
+- Modal interactions: For platform selection
+- Direct review URLs: Platform-specific redirects
 
-### File Structure
-- `index.html` - Main application (self-contained HTML/CSS/JS)
-- `hotel-review-generator.html` - Alternate version with different styling
-- `hotel-review-briefing.md` - Comprehensive project documentation
+## Common Commands
+- Serve locally: `python3 -m http.server 8000`
+- Install test deps: `pip install -r requirements.txt`
+- Deploy to Netlify: `netlify deploy`
+- Run git status: `git status`
+- View changes: `git diff`
 
-### Platform Routing Strategy
+## Do's and Don'ts
+DO:
+- Test on mobile devices before deployment
+- Ensure HTTPS for clipboard API functionality
+- Use fallback templates if API fails
+- Test platform routing logic thoroughly
+- Keep the single-file architecture
 
-The application uses URL parameters to route guests to appropriate review platforms based on their booking source:
+DON'T:
+- Commit API keys to repository
+- Add unnecessary dependencies
+- Create complex build processes
+- Break the self-contained HTML structure
+- Use rounded corners in design
 
-| URL Parameter | Primary Platform | Secondary Platforms | Target Guests |
-|--------------|------------------|-------------------|---------------|
-| None | TripAdvisor | Google Maps | Direct bookings, walk-ins |
-| ?platform=booking | Booking.com | Google Maps, Facebook | Booking.com reservations |
-| ?platform=expedia | Expedia | Google Maps, Facebook | Expedia reservations |
+## Important Notes
+- **API Key**: Stored in .env file (OPENAI_API_KEY)
+- **Clipboard API**: Requires HTTPS in production
+- **Platform URLs**: TripAdvisor requires hotel page (no direct review URL)
+- **Google Maps Place ID**: ChIJjUneyFTemBQR8l8IIFjXpKE
+- **Character limit**: 200 chars for custom comments
 
-**Platform Limitations:**
-- **TripAdvisor**: Direct review URLs (UserReviewEdit) require authentication; must use hotel page
-- **Google Maps**: Direct review URL works with Place ID
-- **Booking/Expedia**: Require booking verification; no public review URLs available
+## Performance Considerations
+- Single file architecture for fastest loading
+- Minimal external dependencies
+- Inline critical CSS and JS
+- Optimized for mobile devices
+- No build process overhead
 
-### Review Generation Flow
-1. Guest selects enjoyed features (3x2 grid)
-2. Optionally selects staff to recognize
-3. Optionally adds custom comments (200 char limit)
-4. System generates review via OpenAI API (gpt-4o-mini)
-5. Fallback to template-based generation if API fails
-6. Review copied to clipboard
-7. Modal presents additional platform options
-8. Auto-redirects to selected platforms
+## Debugging Tips
+- Check browser console for API errors
+- Test clipboard functionality across browsers
+- Verify HTTPS for production deployment
+- Check URL parameters for platform routing
+- Test fallback template generation
 
-## API Integration
+## External Services
+- OpenAI API: Review generation (gpt-4o-mini)
+- TripAdvisor: Primary review platform
+- Google Maps: Secondary review platform
+- Booking.com: For booking.com guests
+- Expedia: For Expedia guests
 
-### OpenAI Configuration
-- **API Key**: [REDACTED - See secure storage]
-  - Previously embedded in JavaScript
-  - Needs to be stored securely (environment variable or secure config)
-  - Update required in index.html and hotel-review-generator.html
-- **Model**: gpt-4o-mini
-- **Temperature**: 0.9 for variety
-- **Max tokens**: 150
-- **Fallback**: Template-based generation if API fails
+## Environment Variables
+- OPENAI_API_KEY: OpenAI API key for review generation
+- Stored in .env file (not committed)
+- See .env.example for template
 
-## Design System
-
-- **Colors**: 
-  - Navy Blue: #1a3a52
-  - Gold: #c9a961  
-  - Sand: #f5f0e8
-- **Typography**: Playfair Display (headers), Montserrat (body)
-- **Layout**: Mobile-first, no rounded corners, minimal luxury aesthetic
-- **Animations**: Smooth transitions with gold hover effects
-
-## Testing Considerations
-
-- Selenium WebDriver available for browser automation
-- Key test scenarios:
-  - Platform routing logic
-  - Clipboard functionality across browsers
-  - OpenAI API fallback mechanism
-  - Mobile responsiveness (iPhone/Android)
-  - Modal interactions and platform redirects
-
-## Deployment Requirements
-
-- **HTTPS required** for clipboard API
-- **Static hosting** sufficient (no server-side logic)
-- **Netlify** configuration present (.netlify in .gitignore)
-
-## Hotel Systems Context
-
-- **PMS**: Opera (Property Management System)
-- **Guest Relations**: Microsoft Power Apps (dedicated app for guest management)
-- **Integration Potential**: Power Apps could potentially trigger review requests via Power Automate workflows without requiring complex backend development
-
-## Recent Updates (2025-08-08)
-
-### UI/UX Improvements
-- **Story-sharing language**: Updated all copy to focus on "sharing stories" rather than "reviews"
-- **Staff recognition emphasis**: Added messaging that staff recognition matters (increases booking influence)
-- **Mobile button fix**: Action section now sticky at bottom for constant visibility
-- **Direct review URLs**: 
-  - Google Maps uses direct writereview URL with Place ID (ChIJjUneyFTemBQR8l8IIFjXpKE)
-  - TripAdvisor uses hotel page (direct review URLs require authentication)
-
-### GitHub & Deployment
-- Repository: https://github.com/ggrigo/domes-milos-reviews
-- Netlify configuration included for automatic deployment
-- Push to main branch triggers auto-deploy when connected to Netlify
+## Hotel Context
+- **Hotels**: All Domes Resorts (including Domes White Coast Milos)
+- **PMS**: Opera Property Management System
+- **Guest Relations**: Microsoft Power Apps
+- **Target**: Encourage authentic guest reviews
+- **Focus**: Story-sharing over traditional reviews
