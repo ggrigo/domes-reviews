@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>Domes Resorts - Share Your Experience</title>
+    <script src="api-client.js"></script>
+    <script src="resort-config.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600&display=swap');
+        
+        :root {
+            --domes-blue: #1a3a52;
+            --domes-gold: #c9a961;
+            --domes-sand: #f5f0e8;
+            --domes-white: #ffffff;
+            --domes-gray: #6b6b6b;
+            --text-dark: #2c2c2c;
+            --border-light: #e0e0e0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, var(--domes-sand) 0%, var(--domes-white) 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        .container {
+            max-width: 450px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            min-height: 100vh;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 400;
+            color: var(--domes-blue);
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+        
+        .tagline {
+            font-size: 11px;
+            color: var(--domes-gray);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 400;
+        }
+        
+        .section {
+            margin-bottom: 35px;
+        }
+        
+        .section-title {
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--domes-blue);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-light);
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        .badge {
+            background: var(--domes-white);
+            border: 1px solid var(--border-light);
+            padding: 18px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        
+        .badge.selected {
+            background: var(--domes-blue);
+            color: var(--domes-white);
+            border-color: var(--domes-blue);
+        }
+        
+        .badge.selected .badge-text {
+            color: var(--domes-white);
+        }
+        
+        .badge-icon {
+            font-size: 20px;
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        .badge-text {
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            color: var(--text-dark);
+            transition: color 0.3s ease;
+        }
+        
+        .staff-badge {
+            background: var(--domes-white);
+            border: 1px solid var(--border-light);
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .staff-badge:hover {
+            border-color: var(--domes-gold);
+            background: var(--domes-sand);
+        }
+        
+        .staff-badge.selected {
+            background: var(--domes-gold);
+            border-color: var(--domes-gold);
+        }
+        
+        .staff-badge.selected .staff-name,
+        .staff-badge.selected .staff-role {
+            color: var(--domes-white);
+        }
+        
+        .staff-icon {
+            font-size: 18px;
+        }
+        
+        .staff-info {
+            flex: 1;
+        }
+        
+        .staff-name {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 2px;
+        }
+        
+        .staff-role {
+            font-size: 10px;
+            color: var(--domes-gray);
+        }
+        
+        .textarea-wrapper {
+            background: var(--domes-white);
+            border: 1px solid var(--border-light);
+            padding: 15px;
+            position: relative;
+        }
+        
+        .textarea {
+            width: 100%;
+            border: none;
+            resize: none;
+            font-family: inherit;
+            font-size: 13px;
+            line-height: 1.6;
+            outline: none;
+            min-height: 80px;
+        }
+        
+        .char-counter {
+            position: absolute;
+            bottom: 10px;
+            right: 15px;
+            font-size: 10px;
+            color: var(--domes-gray);
+        }
+        
+        .action-section {
+            background: var(--domes-white);
+            padding: 25px;
+            border-top: 1px solid var(--border-light);
+            margin: 40px -20px -30px;
+            text-align: center;
+        }
+        
+        .btn-generate {
+            background: var(--domes-blue);
+            color: var(--domes-white);
+            border: none;
+            padding: 18px 45px;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 280px;
+        }
+        
+        .btn-generate:hover:not(:disabled) {
+            background: var(--domes-gold);
+            transform: translateY(-1px);
+        }
+        
+        .btn-generate:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        /* Full-Screen Review Display */
+        .review-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(26, 58, 82, 0.95);
+            backdrop-filter: blur(15px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .review-overlay.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .review-card {
+            background: var(--domes-white);
+            padding: 45px 35px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 25px 70px rgba(0,0,0,0.4);
+            position: relative;
+            animation: slideUp 0.4s ease;
+        }
+        
+        .review-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+        
+        .success-icon {
+            font-size: 48px;
+            color: var(--domes-gold);
+            margin-bottom: 20px;
+            animation: scaleIn 0.5s ease 0.2s both;
+        }
+        
+        .review-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 400;
+            color: var(--domes-blue);
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        
+        .review-subtitle {
+            font-size: 13px;
+            color: var(--domes-gray);
+            font-weight: 300;
+            line-height: 1.5;
+        }
+        
+        .review-content {
+            background: var(--domes-sand);
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .review-text {
+            font-size: 14px;
+            line-height: 1.8;
+            color: var(--text-dark);
+            font-weight: 400;
+        }
+        
+        .review-actions {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn-copy, .btn-continue {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn-copy {
+            background: transparent;
+            color: var(--domes-blue);
+            border: 1px solid var(--domes-blue);
+        }
+        
+        .btn-copy:hover {
+            background: var(--domes-sand);
+        }
+        
+        .btn-copy.copied {
+            background: var(--domes-gold);
+            border-color: var(--domes-gold);
+            color: white;
+        }
+        
+        .btn-continue {
+            background: var(--domes-blue);
+            color: white;
+            border: 1px solid var(--domes-blue);
+        }
+        
+        .btn-continue:hover {
+            background: var(--domes-gold);
+            border-color: var(--domes-gold);
+        }
+        
+        .btn-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            font-size: 28px;
+            color: var(--domes-gray);
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-close:hover {
+            color: var(--domes-blue);
+            transform: rotate(90deg);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        /* Mobile Optimizations */
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px 15px;
+            }
+            
+            .grid {
+                gap: 10px;
+            }
+            
+            .review-card {
+                padding: 35px 25px;
+            }
+            
+            .btn-generate {
+                padding: 16px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="logo">DOMES RESORTS</h1>
+            <p class="tagline">Share Your Story</p>
+        </header>
+        
+        <!-- Features Section -->
+        <section class="section">
+            <h2 class="section-title">What Made Your Stay Special?</h2>
+            <div class="grid" id="featuresGrid">
+                <!-- Features will be dynamically loaded -->
+            </div>
+        </section>
+        
+        <!-- Staff Recognition -->
+        <section class="section">
+            <h2 class="section-title">Recognize Our Team</h2>
+            <div class="grid" id="staffGrid">
+                <!-- Staff will be dynamically loaded -->
+            </div>
+        </section>
+        
+        <!-- Additional Comments -->
+        <section class="section">
+            <h2 class="section-title">Anything Else?</h2>
+            <div class="textarea-wrapper">
+                <textarea 
+                    class="textarea" 
+                    id="extraComments" 
+                    placeholder="Share any special moments or details (optional)"
+                    maxlength="200"
+                ></textarea>
+                <span class="char-counter">0 / 200</span>
+            </div>
+        </section>
+        
+        <!-- Generate Button -->
+        <div class="action-section">
+            <button class="btn-generate" id="generateBtn">Generate Your Review</button>
+        </div>
+    </div>
+    
+    <!-- Full-Screen Review Display -->
+    <div class="review-overlay" id="reviewOverlay">
+        <div class="review-card">
+            <button class="btn-close" id="closeBtn">&times;</button>
+            
+            <div class="review-header">
+                <div class="success-icon">✓</div>
+                <h2 class="review-title">Perfect!</h2>
+                <p class="review-subtitle">Your story is ready to inspire other travelers</p>
+            </div>
+            
+            <div class="review-content">
+                <div class="review-text" id="reviewText">
+                    <!-- Generated review appears here -->
+                </div>
+            </div>
+            
+            <div class="review-actions">
+                <button class="btn-copy" id="copyBtn">
+                    📋 Copy Review
+                </button>
+                <button class="btn-continue" id="continueBtn">
+                    Continue to <span id="platformName">Platform</span> →
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Initialize configuration manager
+        const configManager = new ResortConfigManager();
+        const reviewClient = new ReviewAPIClient();
+        
+        let selectedFeatures = [];
+        let selectedStaff = [];
+        let generatedReview = '';
+        let currentResort = null;
+        let currentPlatform = null;
+        
+        // Initialize app
+        async function initApp() {
+            // Load configuration
+            await configManager.loadConfig();
+            
+            // Get resort and platform from URL
+            const resortId = configManager.getResortFromURL();
+            const platformId = configManager.getPlatformFromURL();
+            
+            // Load resort configuration
+            currentResort = configManager.getResortConfig(resortId);
+            currentPlatform = configManager.getPlatformConfig(platformId);
+            
+            // Update UI with resort data
+            loadFeatures();
+            loadStaff();
+            updatePlatformButton();
+        }
+        
+        // Load features into grid
+        function loadFeatures() {
+            const grid = document.getElementById('featuresGrid');
+            grid.innerHTML = '';
+            
+            Object.entries(currentResort.features).forEach(([key, feature]) => {
+                const badge = document.createElement('div');
+                badge.className = 'badge';
+                badge.dataset.feature = key;
+                badge.innerHTML = `
+                    <span class="badge-icon">${feature.icon}</span>
+                    <span class="badge-text">${feature.label}</span>
+                `;
+                badge.addEventListener('click', () => toggleFeature(key));
+                grid.appendChild(badge);
+            });
+        }
+        
+        // Load staff into grid
+        function loadStaff() {
+            const grid = document.getElementById('staffGrid');
+            grid.innerHTML = '';
+            
+            currentResort.staff.forEach(member => {
+                const badge = document.createElement('div');
+                badge.className = 'staff-badge';
+                badge.dataset.staff = member.display;
+                badge.innerHTML = `
+                    <span class="staff-icon">${member.icon}</span>
+                    <div class="staff-info">
+                        <div class="staff-name">${member.name}</div>
+                        <div class="staff-role">${member.role}</div>
+                    </div>
+                `;
+                badge.addEventListener('click', () => toggleStaff(member.display));
+                grid.appendChild(badge);
+            });
+        }
+        
+        // Toggle feature selection
+        function toggleFeature(feature) {
+            const badge = document.querySelector(`[data-feature="${feature}"]`);
+            badge.classList.toggle('selected');
+            
+            if (selectedFeatures.includes(feature)) {
+                selectedFeatures = selectedFeatures.filter(f => f !== feature);
+            } else {
+                selectedFeatures.push(feature);
+            }
+        }
+        
+        // Toggle staff selection
+        function toggleStaff(staff) {
+            const badge = document.querySelector(`[data-staff="${staff}"]`);
+            badge.classList.toggle('selected');
+            
+            if (selectedStaff.includes(staff)) {
+                selectedStaff = selectedStaff.filter(s => s !== staff);
+            } else {
+                selectedStaff.push(staff);
+            }
+        }
+        
+        // Update platform button text
+        function updatePlatformButton() {
+            const btn = document.getElementById('continueBtn');
+            const platformName = document.getElementById('platformName');
+            platformName.textContent = currentPlatform.name;
+        }
+        
+        // Character counter
+        const extraComments = document.getElementById('extraComments');
+        const charCounter = document.querySelector('.char-counter');
+        
+        extraComments.addEventListener('input', function() {
+            charCounter.textContent = `${this.value.length} / 200`;
+        });
+        
+        // Generate review
+        document.getElementById('generateBtn').addEventListener('click', async function() {
+            if (selectedFeatures.length === 0) {
+                alert('Please select at least one feature you enjoyed');
+                return;
+            }
+            
+            const btn = this;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = 'Creating Your Story...';
+            btn.disabled = true;
+            
+            try {
+                // Generate AI prompt
+                const prompt = configManager.generateAIPrompt(
+                    selectedFeatures, 
+                    selectedStaff, 
+                    extraComments.value.trim()
+                );
+                
+                // Try AI generation first
+                try {
+                    generatedReview = await reviewClient.generateReview(prompt);
+                } catch (error) {
+                    console.log('AI generation failed, using fallback');
+                    generatedReview = configManager.generateFallbackReview(
+                        selectedFeatures, 
+                        selectedStaff, 
+                        extraComments.value.trim()
+                    );
+                }
+                
+                // Display review in full-screen overlay
+                document.getElementById('reviewText').textContent = generatedReview;
+                document.getElementById('reviewOverlay').classList.add('active');
+                
+            } catch (error) {
+                console.error('Error generating review:', error);
+                alert('Error generating review. Please try again.');
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        });
+        
+        // Copy review
+        document.getElementById('copyBtn').addEventListener('click', async function() {
+            try {
+                await navigator.clipboard.writeText(generatedReview);
+                this.classList.add('copied');
+                this.innerHTML = '✓ Copied!';
+                
+                setTimeout(() => {
+                    this.classList.remove('copied');
+                    this.innerHTML = '📋 Copy Review';
+                }, 2000);
+            } catch (err) {
+                // Fallback for older browsers
+                const textarea = document.createElement('textarea');
+                textarea.value = generatedReview;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                
+                this.classList.add('copied');
+                this.innerHTML = '✓ Copied!';
+                
+                setTimeout(() => {
+                    this.classList.remove('copied');
+                    this.innerHTML = '📋 Copy Review';
+                }, 2000);
+            }
+        });
+        
+        // Continue to platform
+        document.getElementById('continueBtn').addEventListener('click', function() {
+            if (currentPlatform && currentPlatform.url) {
+                window.open(currentPlatform.url, '_blank');
+            }
+        });
+        
+        // Close review overlay
+        document.getElementById('closeBtn').addEventListener('click', function() {
+            document.getElementById('reviewOverlay').classList.remove('active');
+        });
+        
+        // Initialize on load
+        initApp();
+    </script>
+</body>
+</html>

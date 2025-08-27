@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Test</title>
+</head>
+<body>
+    <h1>Netlify Function Test</h1>
+    <button onclick="testAPI()">Test OpenAI API</button>
+    <div id="result"></div>
+    
+    <script>
+        async function testAPI() {
+            const result = document.getElementById('result');
+            result.innerHTML = 'Testing...';
+            
+            try {
+                const response = await fetch('/.netlify/functions/generate-review', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        prompt: 'Write a test review for Domes White Coast Milos in 20 words.'
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    result.innerHTML = `<h3>Success!</h3><p>${data.review}</p>`;
+                } else {
+                    result.innerHTML = `<h3>Error ${response.status}</h3><p>${data.error}</p><p>${data.details || ''}</p>`;
+                }
+            } catch (error) {
+                result.innerHTML = `<h3>Network Error</h3><p>${error.message}</p>`;
+            }
+        }
+    </script>
+</body>
+</html>
