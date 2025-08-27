@@ -1,0 +1,54 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(./src/**)",
+      "Read(./tests/**)",
+      "Read(./docs/**)",
+      "Read(*.md)",
+      "Read(package.json)",
+      "Write(./src/**)",
+      "Write(./tests/**)",
+      "Write(./docs/**)",
+      "Write(*.md)",
+      "Bash(git status)",
+      "Bash(git diff:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git log:*)",
+      "Bash(git branch)",
+      "Bash(npm run test:*)",
+      "Bash(npm run lint)",
+      "Bash(npm run build)",
+      "Bash(npm run dev)",
+      "Bash(node *.js)",
+      "Bash(python *.py)"
+    ],
+    "deny": [
+      "Bash(rm -rf *)",
+      "Bash(sudo:*)",
+      "Bash(git push:*)",
+      "Bash(npm publish)",
+      "Bash(*deploy*)",
+      "Read(./.env*)",
+      "Read(./secrets/**)",
+      "Read(./.git/**)",
+      "Write(./.env*)",
+      "Write(./secrets/**)",
+      "Write(package-lock.json)",
+      "Write(yarn.lock)",
+      "Write(pnpm-lock.yaml)"
+    ],
+    "ask": [
+      "Bash(npm install:*)",
+      "Bash(yarn add:*)",
+      "Bash(pip install:*)",
+      "Bash(git checkout:*)",
+      "Bash(git merge:*)",
+      "Bash(git rebase:*)",
+      "Bash(*migrate*)",
+      "Bash(*seed*)"
+    ]
+  },
+  "env": {},
+  "hooks": {}
+}

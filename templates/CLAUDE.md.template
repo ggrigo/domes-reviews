@@ -1,0 +1,71 @@
+# Project Context
+
+## Tech Stack
+- Language: [e.g., TypeScript, Python, Go]
+- Framework: [e.g., React, Vue, FastAPI, Express]
+- Database: [e.g., PostgreSQL, MongoDB, SQLite]
+- Testing: [e.g., Jest, Pytest, Go test]
+- Package Manager: [e.g., npm, yarn, pip, go mod]
+
+## Coding Standards
+- [Your style guide preference]
+- [Your naming conventions]
+- [Your file organization approach]
+- [Your testing requirements]
+
+## Project Structure
+```
+src/
+├── components/     # [What goes here]
+├── services/       # [What goes here]
+├── utils/          # [What goes here]
+└── types/          # [What goes here]
+```
+
+## Key Patterns
+- API endpoints: [Your pattern, e.g., /api/v1/*]
+- State management: [Your approach]
+- Error handling: [Your strategy]
+- Authentication: [Your method]
+
+## Common Commands
+- Install dependencies: [your command]
+- Run development: [your command]
+- Run tests: [your command]
+- Build project: [your command]
+- Deploy: [your command]
+
+## Do's and Don'ts
+DO:
+- [Important practice to follow]
+- [Another good practice]
+- [Required action before commits]
+
+DON'T:
+- [Common mistake to avoid]
+- [Bad practice to prevent]
+- [Action that breaks things]
+
+## Important Notes
+- [Critical information about the project]
+- [Key configuration details]
+- [Deployment considerations]
+
+## Performance Considerations
+- [Known bottlenecks]
+- [Optimization strategies]
+- [Resource constraints]
+
+## Debugging Tips
+- [Where to find logs]
+- [Common error solutions]
+- [Useful debug commands]
+
+## External Services
+- [Service name]: [Purpose and endpoint]
+- [Another service]: [How it's used]
+
+## Environment Variables
+- [Key variables needed]
+- [Where they're configured]
+- [How to get values]

@@ -1,0 +1,59 @@
+# Global Claude Code Configuration
+# Place this file at ~/.claude/CLAUDE.md for personal preferences across all projects
+
+## Personal Coding Preferences
+- Indentation: [spaces/tabs, size]
+- Line endings: [LF/CRLF]
+- Quote style: [single/double]
+- Semicolons: [always/never/asi]
+
+## Preferred Tools & Commands
+- Package manager: [npm/yarn/pnpm]
+- Test runner: [jest/vitest/pytest]
+- Formatter: [prettier/black/rustfmt]
+- Linter: [eslint/pylint/clippy]
+
+## Communication Style
+- Explanation level: [concise/detailed]
+- Code comments: [minimal/comprehensive]
+- Error handling: [explicit/defensive]
+
+## Development Workflow
+- Always run tests before commits
+- Prefer functional programming patterns
+- Use early returns over nested conditionals
+- Write self-documenting code
+
+## Universal Do's and Don'ts
+DO:
+- Check for existing utilities before creating new ones
+- Use semantic variable names
+- Handle edge cases explicitly
+- Write tests for new functions
+
+DON'T:
+- Use var in JavaScript (prefer const/let)
+- Ignore linter warnings
+- Commit commented-out code
+- Use magic numbers without constants
+
+## Preferred Libraries & Patterns
+- HTTP client: [axios/fetch/requests]
+- Date handling: [date-fns/moment/dayjs]
+- State management: [redux/zustand/mobx]
+- CSS approach: [tailwind/styled-components/modules]
+
+## Git Preferences
+- Commit message format: [conventional/simple]
+- Branch naming: [feature/*, bugfix/*, etc]
+- PR description style: [bullet points/narrative]
+
+## Output Preferences
+- Code block language tags: always include
+- Example usage: provide when creating new functions
+- Documentation: inline for complex logic
+
+## System Information
+- Primary OS: [macOS/Linux/Windows]
+- Shell: [bash/zsh/fish]
+- Editor: [vscode/vim/emacs]

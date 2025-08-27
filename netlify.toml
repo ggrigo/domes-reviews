@@ -1,0 +1,24 @@
+# Netlify configuration file
+[build]
+  # No build command needed for static HTML
+  publish = "."
+
+# Redirect rules (if needed)
+[[redirects]]
+  from = "/review"
+  to = "/index.html"
+  status = 200
+
+# Headers for security and performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
