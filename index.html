@@ -349,9 +349,27 @@
         }
         
         .btn-copy.copied {
-            background: var(--domes-gold);
-            border-color: var(--domes-gold);
+            background: #4CAF50;
+            border-color: #4CAF50;
             color: white;
+            animation: successPulse 0.5s ease;
+        }
+        
+        @keyframes successPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes slideDown {
+            from {
+                transform: translateX(-50%) translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
         }
         
         .btn-continue {
@@ -594,10 +612,16 @@
             
             <div class="review-actions">
                 <button class="btn-copy" id="copyBtn">
-                    📋 Copy Review
+                    <span class="copy-icon">📋</span> <span class="copy-text">Copy Review</span>
                 </button>
                 <button class="btn-continue" id="continueBtn">
                     Continue to <span id="platformName">TripAdvisor</span> →
+                </button>
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn-back" id="backBtn" style="background: transparent; border: none; color: var(--domes-gray); font-size: 12px; cursor: pointer; text-decoration: underline;">
+                    ← Back to edit selections
                 </button>
             </div>
         </div>
@@ -762,6 +786,11 @@
         
         // Generate review button
         document.getElementById('generateBtn').addEventListener('click', async function() {
+            // Prevent double-clicking
+            if (this.disabled || this.classList.contains('loading')) {
+                return;
+            }
+            
             if (selectedFeatures.length === 0) {
                 alert('Please select at least one feature you enjoyed');
                 return;
@@ -796,11 +825,19 @@
             try {
                 await navigator.clipboard.writeText(generatedReview);
                 this.classList.add('copied');
-                this.innerHTML = '✓ Copied!';
+                this.innerHTML = '<span class="copy-icon">✓</span> <span class="copy-text">Copied to Clipboard!</span>';
+                
+                // Show a more prominent notification
+                const notification = document.createElement('div');
+                notification.style.cssText = 'position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: #4CAF50; color: white; padding: 15px 30px; border-radius: 5px; font-size: 14px; z-index: 3000; animation: slideDown 0.3s ease';
+                notification.textContent = '✓ Review copied to your clipboard!';
+                document.body.appendChild(notification);
+                
                 setTimeout(() => {
+                    notification.remove();
                     this.classList.remove('copied');
-                    this.innerHTML = '📋 Copy Review';
-                }, 2000);
+                    this.innerHTML = '<span class="copy-icon">📋</span> <span class="copy-text">Copy Review</span>';
+                }, 3000);
             } catch (err) {
                 // Fallback for older browsers
                 const textarea = document.createElement('textarea');
@@ -811,11 +848,19 @@
                 document.body.removeChild(textarea);
                 
                 this.classList.add('copied');
-                this.innerHTML = '✓ Copied!';
+                this.innerHTML = '<span class="copy-icon">✓</span> <span class="copy-text">Copied to Clipboard!</span>';
+                
+                // Show notification for fallback too
+                const notification = document.createElement('div');
+                notification.style.cssText = 'position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: #4CAF50; color: white; padding: 15px 30px; border-radius: 5px; font-size: 14px; z-index: 3000; animation: slideDown 0.3s ease';
+                notification.textContent = '✓ Review copied to your clipboard!';
+                document.body.appendChild(notification);
+                
                 setTimeout(() => {
+                    notification.remove();
                     this.classList.remove('copied');
-                    this.innerHTML = '📋 Copy Review';
-                }, 2000);
+                    this.innerHTML = '<span class="copy-icon">📋</span> <span class="copy-text">Copy Review</span>';
+                }, 3000);
             }
         });
         
@@ -823,15 +868,22 @@
         document.getElementById('continueBtn').addEventListener('click', async function() {
             try {
                 await navigator.clipboard.writeText(generatedReview);
-                this.classList.add('copied');
-                this.innerHTML = '✓ Copied! Opening platform...';
+                this.style.background = '#4CAF50';
+                this.innerHTML = '✓ Review Copied! Opening ' + currentPlatform.name + '...';
+                
+                // Show notification
+                const notification = document.createElement('div');
+                notification.style.cssText = 'position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: #4CAF50; color: white; padding: 15px 30px; border-radius: 5px; font-size: 14px; z-index: 3000; animation: slideDown 0.3s ease';
+                notification.textContent = '✓ Review copied! Opening ' + currentPlatform.name + '...';
+                document.body.appendChild(notification);
                 
                 // Open platform after short delay
                 setTimeout(() => {
                     window.open(currentPlatform.url, '_blank');
-                    this.classList.remove('copied');
-                    this.innerHTML = 'Continue to ' + currentPlatform.name + ' →';
-                }, 1500);
+                    notification.remove();
+                    this.style.background = '';
+                    this.innerHTML = 'Continue to <span id="platformName">' + currentPlatform.name + '</span> →';
+                }, 2000);
             } catch (err) {
                 // Fallback for older browsers
                 const textarea = document.createElement('textarea');
@@ -841,20 +893,32 @@
                 document.execCommand('copy');
                 document.body.removeChild(textarea);
                 
-                this.classList.add('copied');
-                this.innerHTML = '✓ Copied! Opening platform...';
+                this.style.background = '#4CAF50';
+                this.innerHTML = '✓ Review Copied! Opening ' + currentPlatform.name + '...';
+                
+                // Show notification
+                const notification = document.createElement('div');
+                notification.style.cssText = 'position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: #4CAF50; color: white; padding: 15px 30px; border-radius: 5px; font-size: 14px; z-index: 3000; animation: slideDown 0.3s ease';
+                notification.textContent = '✓ Review copied! Opening ' + currentPlatform.name + '...';
+                document.body.appendChild(notification);
                 
                 // Open platform after short delay
                 setTimeout(() => {
                     window.open(currentPlatform.url, '_blank');
-                    this.classList.remove('copied');
-                    this.innerHTML = 'Continue to ' + currentPlatform.name + ' →';
-                }, 1500);
+                    notification.remove();
+                    this.style.background = '';
+                    this.innerHTML = 'Continue to <span id="platformName">' + currentPlatform.name + '</span> →';
+                }, 2000);
             }
         });
         
         // Close review overlay
         document.getElementById('closeBtn').addEventListener('click', function() {
+            document.getElementById('reviewOverlay').classList.remove('active');
+        });
+        
+        // Back button - close overlay and go back to editing
+        document.getElementById('backBtn').addEventListener('click', function() {
             document.getElementById('reviewOverlay').classList.remove('active');
         });
     </script>
