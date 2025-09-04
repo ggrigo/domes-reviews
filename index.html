@@ -752,13 +752,36 @@
             }
         });
         
-        // Edit button - close overlay to go back to form
-        document.getElementById('editBtn').addEventListener('click', function() {
-            document.getElementById('reviewOverlay').classList.remove('active');
+        // Copy button
+        document.getElementById('copyBtn').addEventListener('click', async function() {
+            try {
+                await navigator.clipboard.writeText(generatedReview);
+                this.classList.add('copied');
+                this.innerHTML = '✓ Copied!';
+                setTimeout(() => {
+                    this.classList.remove('copied');
+                    this.innerHTML = '📋 Copy Review';
+                }, 2000);
+            } catch (err) {
+                // Fallback for older browsers
+                const textarea = document.createElement('textarea');
+                textarea.value = generatedReview;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                
+                this.classList.add('copied');
+                this.innerHTML = '✓ Copied!';
+                setTimeout(() => {
+                    this.classList.remove('copied');
+                    this.innerHTML = '📋 Copy Review';
+                }, 2000);
+            }
         });
         
-        // Copy & Continue button
-        document.getElementById('copyContinueBtn').addEventListener('click', async function() {
+        // Continue button - copy and redirect
+        document.getElementById('continueBtn').addEventListener('click', async function() {
             try {
                 await navigator.clipboard.writeText(generatedReview);
                 this.classList.add('copied');
@@ -768,7 +791,7 @@
                 setTimeout(() => {
                     window.open(currentPlatform.url, '_blank');
                     this.classList.remove('copied');
-                    this.innerHTML = '📋 Copy & Continue →';
+                    this.innerHTML = 'Continue to ' + currentPlatform.name + ' →';
                 }, 1500);
             } catch (err) {
                 // Fallback for older browsers
@@ -786,7 +809,7 @@
                 setTimeout(() => {
                     window.open(currentPlatform.url, '_blank');
                     this.classList.remove('copied');
-                    this.innerHTML = '📋 Copy & Continue →';
+                    this.innerHTML = 'Continue to ' + currentPlatform.name + ' →';
                 }, 1500);
             }
         });
