@@ -583,11 +583,56 @@
             }
             
             .review-card {
-                padding: 35px 25px;
+                padding: 30px 20px;
             }
             
             .btn-generate {
                 padding: 16px 30px;
+            }
+            
+            /* Mobile step adjustments */
+            .steps-container {
+                padding: 0 10px;
+                margin: 20px 0;
+            }
+            
+            .step-text {
+                font-size: 10px;
+            }
+            
+            /* Mobile clipboard status */
+            .clipboard-status {
+                padding: 12px;
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            
+            .clipboard-message strong {
+                font-size: 12px;
+            }
+            
+            .clipboard-message small {
+                font-size: 11px;
+                line-height: 1.4;
+            }
+            
+            /* Mobile button adjustments */
+            .btn-primary {
+                padding: 16px 20px;
+                font-size: 12px;
+            }
+            
+            .btn-icon {
+                font-size: 16px;
+            }
+            
+            .review-title {
+                font-size: 24px;
+            }
+            
+            .review-subtitle {
+                font-size: 12px;
             }
         }
     </style>
@@ -730,8 +775,8 @@
             <div class="clipboard-status" id="clipboardStatus" style="display: none;">
                 <div class="clipboard-icon">📋</div>
                 <div class="clipboard-message">
-                    <strong>✓ Review copied to your clipboard!</strong>
-                    <small>Use Ctrl+V (or Cmd+V on Mac) to paste it anywhere</small>
+                    <strong>✓ Review saved & ready to paste!</strong>
+                    <small id="pasteInstructions">When the review box appears, tap and hold, then select "Paste"</small>
                 </div>
             </div>
             
@@ -744,7 +789,7 @@
             <div class="review-actions">
                 <button class="btn-primary" id="continueBtn">
                     <span class="btn-icon">📋</span>
-                    <span class="btn-text">Copy & Open <span id="platformName">TripAdvisor</span></span>
+                    <span class="btn-text">Open <span id="platformName">TripAdvisor</span></span>
                     <span class="btn-arrow">→</span>
                 </button>
                 
@@ -790,6 +835,23 @@
         let selectedFeatures = [];
         let selectedStaff = [];
         let generatedReview = '';
+        
+        // Detect if user is on mobile
+        function isMobileDevice() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+                   (window.innerWidth <= 768);
+        }
+        
+        // Show clipboard status with appropriate instructions
+        function showClipboardStatus() {
+            const pasteInstructions = document.getElementById('pasteInstructions');
+            if (isMobileDevice()) {
+                pasteInstructions.textContent = 'When the review box appears, tap and hold, then select "Paste"';
+            } else {
+                pasteInstructions.textContent = 'Use Ctrl+V (Cmd+V on Mac) to paste in the review box';
+            }
+            document.getElementById('clipboardStatus').style.display = 'flex';
+        }
         
         // Feature selection
         document.querySelectorAll('.badge').forEach(badge => {
@@ -942,8 +1004,8 @@
                 setTimeout(async () => {
                     try {
                         await navigator.clipboard.writeText(generatedReview);
-                        // Show clipboard status
-                        document.getElementById('clipboardStatus').style.display = 'flex';
+                        // Show clipboard status with appropriate instructions
+                        showClipboardStatus();
                         // Update step 2 to completed
                         document.getElementById('step2').classList.remove('active');
                         document.getElementById('step2').classList.add('completed');
@@ -958,8 +1020,8 @@
                         document.execCommand('copy');
                         document.body.removeChild(textarea);
                         
-                        // Show clipboard status
-                        document.getElementById('clipboardStatus').style.display = 'flex';
+                        // Show clipboard status with appropriate instructions
+                        showClipboardStatus();
                         document.getElementById('step2').classList.remove('active');
                         document.getElementById('step2').classList.add('completed');
                         document.getElementById('step3').classList.add('active');
