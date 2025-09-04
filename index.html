@@ -228,6 +228,11 @@
             transition: all 0.3s ease;
             width: 100%;
             max-width: 280px;
+            position: relative;
+            min-height: 54px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .btn-generate:hover:not(:disabled) {
@@ -381,6 +386,38 @@
         .btn-close:hover {
             color: var(--domes-blue);
             transform: rotate(90deg);
+        }
+        
+        /* Loader Styles */
+        .loader {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+        
+        .loader:after {
+            content: " ";
+            display: block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--domes-white);
+            border-color: var(--domes-white) transparent var(--domes-white) transparent;
+            animation: loader-spin 1.2s linear infinite;
+        }
+        
+        @keyframes loader-spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .btn-generate.loading {
+            pointer-events: none;
+            opacity: 0.9;
         }
         
         /* Animations */
@@ -732,7 +769,8 @@
             
             const btn = this;
             const originalText = btn.innerHTML;
-            btn.innerHTML = 'Creating Your Story...';
+            btn.innerHTML = '<span class="loader"></span><span>Crafting Your Story...</span>';
+            btn.classList.add('loading');
             btn.disabled = true;
             
             try {
@@ -748,6 +786,7 @@
                 alert('Error generating review. Please try again.');
             } finally {
                 btn.innerHTML = originalText;
+                btn.classList.remove('loading');
                 btn.disabled = false;
             }
         });
