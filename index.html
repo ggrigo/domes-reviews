@@ -305,31 +305,34 @@
         
         .review-content {
             background: var(--domes-sand);
-            padding: 20px;
-            margin-bottom: 20px;
-            max-height: 200px;
+            padding: 25px;
+            margin-bottom: 25px;
+            max-height: 350px;
             overflow-y: auto;
-            border: 1px solid var(--border-light);
             position: relative;
         }
         
-        /* Scrollbar styling for better visibility */
+        /* Subtle scrollbar - only visible when scrolling */
         .review-content::-webkit-scrollbar {
-            width: 6px;
+            width: 4px;
         }
         
         .review-content::-webkit-scrollbar-track {
-            background: rgba(0,0,0,0.05);
+            background: transparent;
         }
         
         .review-content::-webkit-scrollbar-thumb {
-            background: var(--domes-gold);
-            border-radius: 3px;
+            background: rgba(201, 169, 97, 0.3);
+            border-radius: 2px;
+        }
+        
+        .review-content:hover::-webkit-scrollbar-thumb {
+            background: rgba(201, 169, 97, 0.5);
         }
         
         .review-text {
-            font-size: 13px;
-            line-height: 1.6;
+            font-size: 14px;
+            line-height: 1.7;
             color: var(--text-dark);
             font-weight: 400;
         }
@@ -681,12 +684,12 @@
             .review-content {
                 padding: 15px;
                 margin-bottom: 15px;
-                max-height: 150px;
+                max-height: 280px;
             }
             
             .review-text {
-                font-size: 12px;
-                line-height: 1.5;
+                font-size: 13px;
+                line-height: 1.6;
             }
             
             .review-actions {
