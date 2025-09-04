@@ -317,48 +317,165 @@
             font-weight: 400;
         }
         
+        /* Steps Container */
+        .steps-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 30px 0;
+            padding: 0 20px;
+        }
+        
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+            opacity: 0.4;
+            transition: all 0.3s ease;
+        }
+        
+        .step.completed {
+            opacity: 1;
+        }
+        
+        .step.completed .step-number {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .step.active {
+            opacity: 1;
+        }
+        
+        .step.active .step-number {
+            background: var(--domes-gold);
+            color: white;
+            animation: pulse 2s infinite;
+        }
+        
+        .step-number {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--border-light);
+            color: var(--domes-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .step-text {
+            font-size: 11px;
+            color: var(--domes-gray);
+            text-align: center;
+        }
+        
+        /* Clipboard Status Box */
+        .clipboard-status {
+            background: #E8F5E9;
+            border: 1px solid #4CAF50;
+            padding: 15px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            animation: slideIn 0.3s ease;
+        }
+        
+        .clipboard-icon {
+            font-size: 24px;
+        }
+        
+        .clipboard-message {
+            flex: 1;
+        }
+        
+        .clipboard-message strong {
+            display: block;
+            color: #2E7D32;
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+        
+        .clipboard-message small {
+            color: var(--domes-gray);
+            font-size: 11px;
+        }
+        
+        /* Updated Button Styles */
         .review-actions {
             display: flex;
+            flex-direction: column;
             gap: 15px;
         }
         
-        .btn-copy, .btn-continue {
-            flex: 1;
-            padding: 15px;
+        .btn-primary {
+            background: var(--domes-blue);
+            color: white;
             border: none;
-            font-size: 12px;
+            padding: 18px 30px;
+            font-size: 13px;
             font-weight: 500;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            letter-spacing: 0.5px;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 10px;
+            width: 100%;
         }
         
-        .btn-copy {
-            background: transparent;
-            color: var(--domes-blue);
-            border: 1px solid var(--domes-blue);
+        .btn-primary:hover {
+            background: var(--domes-gold);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
         
-        .btn-copy:hover {
-            background: var(--domes-sand);
-        }
-        
-        .btn-copy.copied {
+        .btn-primary.success {
             background: #4CAF50;
-            border-color: #4CAF50;
-            color: white;
-            animation: successPulse 0.5s ease;
         }
         
-        @keyframes successPulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+        .btn-icon {
+            font-size: 18px;
+        }
+        
+        .btn-arrow {
+            margin-left: auto;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--domes-gray);
+            border: none;
+            padding: 12px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            color: var(--domes-blue);
+            text-decoration: underline;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateY(-10px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
         
         @keyframes slideDown {
@@ -370,17 +487,6 @@
                 transform: translateX(-50%) translateY(0);
                 opacity: 1;
             }
-        }
-        
-        .btn-continue {
-            background: var(--domes-blue);
-            color: white;
-            border: 1px solid var(--domes-blue);
-        }
-        
-        .btn-continue:hover {
-            background: var(--domes-gold);
-            border-color: var(--domes-gold);
         }
         
         .btn-close {
@@ -600,8 +706,33 @@
             
             <div class="review-header">
                 <div class="success-icon">✓</div>
-                <h2 class="review-title">Perfect!</h2>
-                <p class="review-subtitle">Your story is ready to inspire other travelers</p>
+                <h2 class="review-title">Your Review is Ready!</h2>
+                <p class="review-subtitle">Follow these simple steps to share your experience</p>
+            </div>
+            
+            <!-- Step indicators -->
+            <div class="steps-container">
+                <div class="step completed">
+                    <span class="step-number">1</span>
+                    <span class="step-text">Review Generated</span>
+                </div>
+                <div class="step active" id="step2">
+                    <span class="step-number">2</span>
+                    <span class="step-text">Copy to Clipboard</span>
+                </div>
+                <div class="step" id="step3">
+                    <span class="step-number">3</span>
+                    <span class="step-text">Paste on Platform</span>
+                </div>
+            </div>
+            
+            <!-- Clipboard status box -->
+            <div class="clipboard-status" id="clipboardStatus" style="display: none;">
+                <div class="clipboard-icon">📋</div>
+                <div class="clipboard-message">
+                    <strong>✓ Review copied to your clipboard!</strong>
+                    <small>Use Ctrl+V (or Cmd+V on Mac) to paste it anywhere</small>
+                </div>
             </div>
             
             <div class="review-content">
@@ -611,17 +742,14 @@
             </div>
             
             <div class="review-actions">
-                <button class="btn-copy" id="copyBtn">
-                    <span class="copy-icon">📋</span> <span class="copy-text">Copy Review</span>
+                <button class="btn-primary" id="continueBtn">
+                    <span class="btn-icon">📋</span>
+                    <span class="btn-text">Copy & Open <span id="platformName">TripAdvisor</span></span>
+                    <span class="btn-arrow">→</span>
                 </button>
-                <button class="btn-continue" id="continueBtn">
-                    Continue to <span id="platformName">TripAdvisor</span> →
-                </button>
-            </div>
-            
-            <div style="text-align: center; margin-top: 20px;">
-                <button class="btn-back" id="backBtn" style="background: transparent; border: none; color: var(--domes-gray); font-size: 12px; cursor: pointer; text-decoration: underline;">
-                    ← Back to edit selections
+                
+                <button class="btn-secondary" id="backBtn">
+                    ← Edit my selections
                 </button>
             </div>
         </div>
@@ -810,6 +938,34 @@
                 document.getElementById('reviewText').textContent = generatedReview;
                 document.getElementById('reviewOverlay').classList.add('active');
                 
+                // Auto-copy to clipboard
+                setTimeout(async () => {
+                    try {
+                        await navigator.clipboard.writeText(generatedReview);
+                        // Show clipboard status
+                        document.getElementById('clipboardStatus').style.display = 'flex';
+                        // Update step 2 to completed
+                        document.getElementById('step2').classList.remove('active');
+                        document.getElementById('step2').classList.add('completed');
+                        // Make step 3 active
+                        document.getElementById('step3').classList.add('active');
+                    } catch (err) {
+                        // Fallback for older browsers
+                        const textarea = document.createElement('textarea');
+                        textarea.value = generatedReview;
+                        document.body.appendChild(textarea);
+                        textarea.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(textarea);
+                        
+                        // Show clipboard status
+                        document.getElementById('clipboardStatus').style.display = 'flex';
+                        document.getElementById('step2').classList.remove('active');
+                        document.getElementById('step2').classList.add('completed');
+                        document.getElementById('step3').classList.add('active');
+                    }
+                }, 500); // Small delay for better UX
+                
             } catch (error) {
                 console.error('Error:', error);
                 alert('Error generating review. Please try again.');
@@ -820,106 +976,56 @@
             }
         });
         
-        // Copy button
-        document.getElementById('copyBtn').addEventListener('click', async function() {
+        // Continue button - open platform (review already copied)
+        document.getElementById('continueBtn').addEventListener('click', async function() {
+            // Ensure review is still in clipboard (in case user cleared it)
             try {
                 await navigator.clipboard.writeText(generatedReview);
-                this.classList.add('copied');
-                this.innerHTML = '<span class="copy-icon">✓</span> <span class="copy-text">Copied to Clipboard!</span>';
-                
-                // Show a more prominent notification
-                const notification = document.createElement('div');
-                notification.style.cssText = 'position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: #4CAF50; color: white; padding: 15px 30px; border-radius: 5px; font-size: 14px; z-index: 3000; animation: slideDown 0.3s ease';
-                notification.textContent = '✓ Review copied to your clipboard!';
-                document.body.appendChild(notification);
-                
-                setTimeout(() => {
-                    notification.remove();
-                    this.classList.remove('copied');
-                    this.innerHTML = '<span class="copy-icon">📋</span> <span class="copy-text">Copy Review</span>';
-                }, 3000);
             } catch (err) {
-                // Fallback for older browsers
+                // Fallback
                 const textarea = document.createElement('textarea');
                 textarea.value = generatedReview;
                 document.body.appendChild(textarea);
                 textarea.select();
                 document.execCommand('copy');
                 document.body.removeChild(textarea);
-                
-                this.classList.add('copied');
-                this.innerHTML = '<span class="copy-icon">✓</span> <span class="copy-text">Copied to Clipboard!</span>';
-                
-                // Show notification for fallback too
-                const notification = document.createElement('div');
-                notification.style.cssText = 'position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: #4CAF50; color: white; padding: 15px 30px; border-radius: 5px; font-size: 14px; z-index: 3000; animation: slideDown 0.3s ease';
-                notification.textContent = '✓ Review copied to your clipboard!';
-                document.body.appendChild(notification);
-                
-                setTimeout(() => {
-                    notification.remove();
-                    this.classList.remove('copied');
-                    this.innerHTML = '<span class="copy-icon">📋</span> <span class="copy-text">Copy Review</span>';
-                }, 3000);
             }
+            
+            // Update button to show action
+            this.classList.add('success');
+            const originalHTML = this.innerHTML;
+            this.innerHTML = '<span class="btn-icon">✓</span><span class="btn-text">Opening ' + currentPlatform.name + '...</span>';
+            
+            // Open platform after small delay for visual feedback
+            setTimeout(() => {
+                window.open(currentPlatform.url, '_blank');
+                // Reset button after opening
+                setTimeout(() => {
+                    this.classList.remove('success');
+                    this.innerHTML = originalHTML;
+                }, 1000);
+            }, 800);
         });
         
-        // Continue button - copy and redirect
-        document.getElementById('continueBtn').addEventListener('click', async function() {
-            try {
-                await navigator.clipboard.writeText(generatedReview);
-                this.style.background = '#4CAF50';
-                this.innerHTML = '✓ Review Copied! Opening ' + currentPlatform.name + '...';
-                
-                // Show notification
-                const notification = document.createElement('div');
-                notification.style.cssText = 'position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: #4CAF50; color: white; padding: 15px 30px; border-radius: 5px; font-size: 14px; z-index: 3000; animation: slideDown 0.3s ease';
-                notification.textContent = '✓ Review copied! Opening ' + currentPlatform.name + '...';
-                document.body.appendChild(notification);
-                
-                // Open platform after short delay
-                setTimeout(() => {
-                    window.open(currentPlatform.url, '_blank');
-                    notification.remove();
-                    this.style.background = '';
-                    this.innerHTML = 'Continue to <span id="platformName">' + currentPlatform.name + '</span> →';
-                }, 2000);
-            } catch (err) {
-                // Fallback for older browsers
-                const textarea = document.createElement('textarea');
-                textarea.value = generatedReview;
-                document.body.appendChild(textarea);
-                textarea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textarea);
-                
-                this.style.background = '#4CAF50';
-                this.innerHTML = '✓ Review Copied! Opening ' + currentPlatform.name + '...';
-                
-                // Show notification
-                const notification = document.createElement('div');
-                notification.style.cssText = 'position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: #4CAF50; color: white; padding: 15px 30px; border-radius: 5px; font-size: 14px; z-index: 3000; animation: slideDown 0.3s ease';
-                notification.textContent = '✓ Review copied! Opening ' + currentPlatform.name + '...';
-                document.body.appendChild(notification);
-                
-                // Open platform after short delay
-                setTimeout(() => {
-                    window.open(currentPlatform.url, '_blank');
-                    notification.remove();
-                    this.style.background = '';
-                    this.innerHTML = 'Continue to <span id="platformName">' + currentPlatform.name + '</span> →';
-                }, 2000);
-            }
-        });
+        // Function to reset overlay state
+        function resetOverlayState() {
+            document.getElementById('reviewOverlay').classList.remove('active');
+            // Reset steps
+            document.getElementById('step2').classList.remove('completed');
+            document.getElementById('step2').classList.add('active');
+            document.getElementById('step3').classList.remove('active');
+            // Hide clipboard status
+            document.getElementById('clipboardStatus').style.display = 'none';
+        }
         
         // Close review overlay
         document.getElementById('closeBtn').addEventListener('click', function() {
-            document.getElementById('reviewOverlay').classList.remove('active');
+            resetOverlayState();
         });
         
         // Back button - close overlay and go back to editing
         document.getElementById('backBtn').addEventListener('click', function() {
-            document.getElementById('reviewOverlay').classList.remove('active');
+            resetOverlayState();
         });
     </script>
 </body>
