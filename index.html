@@ -6,7 +6,6 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <title>Domes Resorts - Share Your Experience</title>
-    <script src="api-client.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600&display=swap');
         
@@ -220,15 +219,15 @@
             background: var(--domes-blue);
             color: var(--domes-white);
             border: none;
-            padding: 20px 45px;
-            font-size: 14px;
+            padding: 18px 45px;
+            font-size: 12px;
             font-weight: 500;
             letter-spacing: 1.5px;
             text-transform: uppercase;
             cursor: pointer;
             transition: all 0.3s ease;
             width: 100%;
-            max-width: 320px;
+            max-width: 280px;
         }
         
         .btn-generate:hover:not(:disabled) {
@@ -318,11 +317,11 @@
             gap: 15px;
         }
         
-        .btn-edit, .btn-copy-continue {
+        .btn-copy, .btn-continue {
             flex: 1;
-            padding: 18px;
+            padding: 15px;
             border: none;
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 500;
             letter-spacing: 1px;
             text-transform: uppercase;
@@ -334,28 +333,29 @@
             gap: 8px;
         }
         
-        .btn-edit {
+        .btn-copy {
             background: transparent;
             color: var(--domes-blue);
             border: 1px solid var(--domes-blue);
         }
         
-        .btn-edit:hover {
+        .btn-copy:hover {
             background: var(--domes-sand);
         }
         
-        .btn-copy-continue {
+        .btn-copy.copied {
+            background: var(--domes-gold);
+            border-color: var(--domes-gold);
+            color: white;
+        }
+        
+        .btn-continue {
             background: var(--domes-blue);
             color: white;
             border: 1px solid var(--domes-blue);
         }
         
-        .btn-copy-continue:hover {
-            background: var(--domes-gold);
-            border-color: var(--domes-gold);
-        }
-        
-        .btn-copy-continue.copied {
+        .btn-continue:hover {
             background: var(--domes-gold);
             border-color: var(--domes-gold);
         }
@@ -381,78 +381,6 @@
         .btn-close:hover {
             color: var(--domes-blue);
             transform: rotate(90deg);
-        }
-        
-        /* Loader Styles */
-        .loader-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(26, 58, 82, 0.95);
-            backdrop-filter: blur(15px);
-            z-index: 3000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-        
-        .loader-overlay.active {
-            display: flex;
-        }
-        
-        .loader-content {
-            text-align: center;
-        }
-        
-        .loader-spinner {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 25px;
-            position: relative;
-        }
-        
-        .loader-spinner::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border: 3px solid rgba(201, 169, 97, 0.2);
-            border-top-color: var(--domes-gold);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        
-        .loader-text {
-            color: var(--domes-white);
-            font-size: 14px;
-            font-weight: 300;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            animation: pulse 2s ease-in-out infinite;
-        }
-        
-        .instruction-text {
-            font-size: 13px;
-            color: var(--domes-gray);
-            margin-top: 15px;
-            line-height: 1.6;
-            padding: 0 20px;
-            text-align: center;
-            font-style: italic;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
         }
         
         /* Animations */
@@ -627,33 +555,18 @@
                 </div>
             </div>
             
-            <div class="instruction-text">
-                After copying, paste your review on the platform's review page
-            </div>
-            
             <div class="review-actions">
-                <button class="btn-edit" id="editBtn">
-                    ✏️ Edit
+                <button class="btn-copy" id="copyBtn">
+                    📋 Copy Review
                 </button>
-                <button class="btn-copy-continue" id="copyContinueBtn">
-                    📋 Copy & Continue →
+                <button class="btn-continue" id="continueBtn">
+                    Continue to <span id="platformName">TripAdvisor</span> →
                 </button>
             </div>
-        </div>
-    </div>
-    
-    <!-- Loading Overlay -->
-    <div class="loader-overlay" id="loaderOverlay">
-        <div class="loader-content">
-            <div class="loader-spinner"></div>
-            <div class="loader-text">Crafting Your Story</div>
         </div>
     </div>
     
     <script>
-        // Initialize secure API client
-        const reviewClient = new ReviewAPIClient();
-        
         // Get platform from URL parameters
         const urlParams = new URLSearchParams(window.location.search);
         const platform = urlParams.get('platform') || 'tripadvisor';
@@ -680,6 +593,9 @@
         
         // Get current platform configuration
         const currentPlatform = platformConfig[platform] || platformConfig.tripadvisor;
+        
+        // Update platform button text
+        document.getElementById('platformName').textContent = currentPlatform.name;
         
         // Track selections
         let selectedFeatures = [];
@@ -750,8 +666,25 @@
             
             try {
                 // Use secure Netlify function
-                const review = await reviewClient.generateReview(prompt);
-                return review;
+                const response = await fetch('/.netlify/functions/generate-review', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ prompt })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`API error: ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+
+                return data.review;
             } catch (error) {
                 console.error('Error generating AI review:', error);
                 return generateFallbackReview();
@@ -799,10 +732,8 @@
             
             const btn = this;
             const originalText = btn.innerHTML;
+            btn.innerHTML = 'Creating Your Story...';
             btn.disabled = true;
-            
-            // Show loader overlay
-            document.getElementById('loaderOverlay').classList.add('active');
             
             try {
                 // Generate review
@@ -816,8 +747,6 @@
                 console.error('Error:', error);
                 alert('Error generating review. Please try again.');
             } finally {
-                // Hide loader overlay
-                document.getElementById('loaderOverlay').classList.remove('active');
                 btn.innerHTML = originalText;
                 btn.disabled = false;
             }
