@@ -6,6 +6,7 @@
 - API: OpenAI GPT-4o-mini
 - Testing: Selenium WebDriver (Python)
 - Package Manager: npm (for development tools)
+- Python Environment: .venv virtual environment (for Python dependencies)
 
 ## Coding Standards
 - Mobile-first responsive design
@@ -36,8 +37,9 @@
 - Direct review URLs: Platform-specific redirects
 
 ## Common Commands
+- Activate Python venv: `source .venv/bin/activate` (Linux/Mac) or `.venv\Scripts\activate` (Windows)
 - Serve locally: `python3 -m http.server 8000`
-- Install test deps: `pip install -r requirements.txt`
+- Install test deps: `pip install -r requirements.txt` (use .venv)
 - Deploy to Netlify: `netlify deploy`
 - Run git status: `git status`
 - View changes: `git diff`
